@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Outlet, Link } from "react-router-dom";
 
 class Layout extends Component {
     render() {
@@ -18,7 +19,7 @@ class Layout extends Component {
                             <Link to="/item">Item</Link>
                         </li>
                         <li>
-                            <Link to="/nothing-here">Nothing Here</Link>
+                            <Link to="/nothing-here">404 Page</Link>
                         </li>
                     </ul>
                 </nav>
