@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Outlet, Link } from "react-router-dom";
 
+// AppBar
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,41 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-export class Layout extends Component {
-    render() {
-        return (
-            <div>
-                {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/customer">Customer</Link>
-                        </li>
-                        <li>
-                            <Link to="/item">Item</Link>
-                        </li>
-                        <li>
-                            <Link to="/nothing-here">404 Page</Link>
-                        </li>
-                    </ul>
-                </nav>
-
-                <hr />
-
-                {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
-                <Outlet />
-            </div>
-        );
-    }
-}
-
-export class ResponsiveAppBar extends Component {
+export default class ResponsiveAppBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,20 +24,32 @@ export class ResponsiveAppBar extends Component {
             anchorElUser: null
         }
     }
-    // pages = ['Products', 'Pricing', 'Blog'];
+
     pages = [
         { text: 'Home', to: '/' },
         { text: 'Customer', to: '/customer' },
         { text: 'Item', to: '/item' }
     ]
-    settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+    settings = [
+        {
+            text: 'Home',
+            to: '/'
+        },
+        {
+            text: 'Settings',
+            to: '/setting'
+        },
+        {
+            text: 'Log out',
+            to: '/logout'
+        }
+    ]
 
     handleOpenNavMenu = (event) => {
-        // setAnchorElNav(event.currentTarget);
         this.setState({ anchorElNav: event.currentTarget })
     };
     handleOpenUserMenu = (event) => {
-        // setAnchorElUser(event.currentTarget);
         this.setState({ anchorElUser: event.currentTarget });
     };
 
@@ -79,7 +58,6 @@ export class ResponsiveAppBar extends Component {
     };
 
     handleCloseUserMenu = () => {
-        // setAnchorElUser(null);
         this.setState({ anchorElUser: null });
     };
 
@@ -180,7 +158,7 @@ export class ResponsiveAppBar extends Component {
                             <Box sx={{ flexGrow: 0 }}>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={this.handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                        <Avatar alt="Remy Sharp" src="https://avatars.githubusercontent.com/u/71526158?v=4" />
                                     </IconButton>
                                 </Tooltip>
                                 <Menu
@@ -200,8 +178,10 @@ export class ResponsiveAppBar extends Component {
                                     onClose={this.handleCloseUserMenu}
                                 >
                                     {this.settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={this.handleCloseUserMenu}>
-                                            <Typography textAlign="center">{setting}</Typography>
+                                        <MenuItem key={setting.text} onClick={this.handleCloseUserMenu}>
+                                            <Link to={setting.to} style={{ textDecoration: 'none', color: 'black' }}>
+                                                <Typography textAlign="center"> {setting.text}</Typography>
+                                            </Link>
                                         </MenuItem>
                                     ))}
                                 </Menu>
