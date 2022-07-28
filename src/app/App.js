@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "../pages/Layout";
+import { Layout, ResponsiveAppBar } from "../pages/Layout";
 import Home from "../pages/Home";
 import Customer from "../pages/Customer";
 import Item from "../pages/Item";
@@ -12,7 +12,7 @@ function App() {
     //  parent route paths, and nested route elements render inside
     //    parent route elements. See the note about <Outlet> below. 
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<ResponsiveAppBar />}>
         <Route index element={<Home />} />
         <Route path="customer" element={<Customer />} />
         <Route path="item" element={<Item />} />
